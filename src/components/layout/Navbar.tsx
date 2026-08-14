@@ -3,11 +3,13 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NAV_LINKS } from '@/lib/constants';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -92,8 +94,10 @@ export default function Navbar() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-8">
             {NAV_LINKS?.map((link) => {
-              const hrefId = link.href.replace('#', '');
-              const isActive = activeSection === hrefId;
+              const hrefId = link.href.replace('#', '').replace('/', '');
+              const isActive =
+                pathname === link.href ||
+                (pathname === '/' && (activeSection === hrefId || (activeSection === 'about' && link.href === '/about')));
               
               return (
                 <Link
@@ -177,8 +181,10 @@ export default function Navbar() {
           >
             <div className="flex flex-col space-y-6 flex-grow">
               {NAV_LINKS?.map((link) => {
-                const hrefId = link.href.replace('#', '');
-                const isActive = activeSection === hrefId;
+                const hrefId = link.href.replace('#', '').replace('/', '');
+                const isActive =
+                  pathname === link.href ||
+                  (pathname === '/' && (activeSection === hrefId || (activeSection === 'about' && link.href === '/about')));
 
                 return (
                   <Link

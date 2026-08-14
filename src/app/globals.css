@@ -163,22 +163,7 @@ h1, h2, h3, h4, h5, h6 {
    SCROLLBAR
    ========================================== */
 
-::-webkit-scrollbar {
-  width: 6px;
-}
 
-::-webkit-scrollbar-track {
-  background: var(--navy-dark);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--electric-blue);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--orange);
-}
 
 /* ==========================================
    ANIMATED GRADIENT MESH (Hero)

@@ -20,8 +20,8 @@ const SceneContent = () => {
   // Mouse interaction & Auto rotation
   useFrame((state) => {
     if (groupRef.current) {
-      // Auto rotation base
-      const timeRotation = state.clock.elapsedTime * 0.05;
+      // Auto rotation base using performance.now() to avoid THREE.Clock warning
+      const timeRotation = (performance.now() / 1000) * 0.05;
       
       // Mouse interaction (reduced intensity)
       const targetX = (state.pointer.x * Math.PI) / 8;

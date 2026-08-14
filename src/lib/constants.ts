@@ -15,12 +15,12 @@ export const BRAND = {
 // =============================================
 
 export const NAV_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Programs", href: "#why-skillpedia" },
-  { label: "Curriculum", href: "#roadmap" },
-  { label: "Projects", href: "#projects" },
-  { label: "Careers", href: "#careers" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Programs", href: "/#why-skillpedia" },
+  { label: "Curriculum", href: "/#roadmap" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Careers", href: "/#careers" },
+  { label: "Contact", href: "/#contact" },
 ] as const;
 
 // =============================================
@@ -434,24 +434,24 @@ export const FAQ_ITEMS = [
 
 export const FOOTER_LINKS = {
   programs: [
-    { label: "Full Stack Engineering", href: "#roadmap" },
-    { label: "AI & ML Development", href: "#roadmap" },
-    { label: "Career Acceleration", href: "#careers" },
+    { label: "Full Stack Engineering", href: "/#roadmap" },
+    { label: "AI & ML Development", href: "/#roadmap" },
+    { label: "Career Acceleration", href: "/#careers" },
   ],
   company: [
-    { label: "About Us", href: "#about" },
-    { label: "Our Method", href: "#learning-flow" },
-    { label: "Success Stories", href: "#testimonials" },
+    { label: "About Us", href: "/about" },
+    { label: "Our Method", href: "/#learning-flow" },
+    { label: "Success Stories", href: "/#testimonials" },
   ],
   resources: [
-    { label: "Curriculum", href: "#roadmap" },
-    { label: "Projects", href: "#projects" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Curriculum", href: "/#roadmap" },
+    { label: "Projects", href: "/#projects" },
+    { label: "FAQ", href: "/#faq" },
   ],
   legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Refund Policy", href: "#" },
+    { label: "Privacy Policy", href: "/#" },
+    { label: "Terms of Service", href: "/#" },
+    { label: "Refund Policy", href: "/#" },
   ],
 } as const;
 
