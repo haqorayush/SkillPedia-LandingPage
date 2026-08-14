@@ -41,4 +41,4 @@ yarn-error.log*
 next-env.d.ts
 
 # raw team images folder (now copied to public/images/team/)
-team/
+/team/
