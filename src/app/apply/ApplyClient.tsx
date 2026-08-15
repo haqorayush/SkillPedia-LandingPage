@@ -25,6 +25,7 @@ export default function ApplyClient() {
     email: '',
     countryCode: '+91',
     phone: '',
+    qualification: 'Undergraduate',
     status: 'Final Year College Student',
     program: PROGRAMS_LIST[0].title,
     expertise: 'Beginner',
@@ -102,6 +103,7 @@ export default function ApplyClient() {
           email: '',
           countryCode: '+91',
           phone: '',
+          qualification: 'Undergraduate',
           status: 'Final Year College Student',
           program: PROGRAMS_LIST[0].title,
           expertise: 'Beginner',
@@ -273,33 +275,52 @@ export default function ApplyClient() {
                     </div>
                   </div>
 
-                  {/* Phone & Status Row */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="phone" className="text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number *</label>
-                      <div className="flex bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl overflow-hidden focus-within:ring-1 focus-within:ring-blue-500 focus-within:border-blue-500 transition-all">
-                        <div className="flex items-center pl-4 py-3 bg-gray-100/50 dark:bg-white/5 border-r border-gray-200 dark:border-white/10">
-                          <span className="text-lg mr-2 select-none" title="Country Flag">{getFlagEmoji(formData.countryCode)}</span>
-                          <input 
-                            type="text" 
-                            name="countryCode"
-                            value={formData.countryCode}
-                            onChange={handleChange}
-                            className="w-12 bg-transparent text-gray-900 dark:text-white focus:outline-none p-0 border-none"
-                            placeholder="+1"
-                          />
-                        </div>
+                  {/* Phone Row */}
+                  <div className="space-y-2">
+                    <label htmlFor="phone" className="text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number *</label>
+                    <div className="flex bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl overflow-hidden focus-within:ring-1 focus-within:ring-blue-500 focus-within:border-blue-500 transition-all">
+                      <div className="flex items-center pl-4 py-3 bg-gray-100/50 dark:bg-white/5 border-r border-gray-200 dark:border-white/10">
+                        <span className="text-lg mr-2 select-none" title="Country Flag">{getFlagEmoji(formData.countryCode)}</span>
                         <input 
-                          type="tel" 
-                          id="phone"
-                          name="phone"
-                          required
-                          value={formData.phone}
+                          type="text" 
+                          name="countryCode"
+                          value={formData.countryCode}
                           onChange={handleChange}
-                          className="w-full bg-transparent px-4 py-3 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none border-none"
-                          placeholder="98765 43210"
+                          className="w-12 bg-transparent text-gray-900 dark:text-white focus:outline-none p-0 border-none"
+                          placeholder="+1"
                         />
                       </div>
+                      <input 
+                        type="tel" 
+                        id="phone"
+                        name="phone"
+                        required
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full bg-transparent px-4 py-3 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none border-none"
+                        placeholder="98765 43210"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Qualification & Status Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label htmlFor="qualification" className="text-sm font-medium text-gray-700 dark:text-gray-300">Highest Qualification *</label>
+                      <select 
+                        id="qualification"
+                        name="qualification"
+                        required
+                        value={formData.qualification}
+                        onChange={handleChange}
+                        className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none"
+                      >
+                        <option value="High School">High School</option>
+                        <option value="Undergraduate">Undergraduate</option>
+                        <option value="Postgraduate">Postgraduate</option>
+                        <option value="PhD / Doctorate">PhD / Doctorate</option>
+                        <option value="Other">Other</option>
+                      </select>
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="status" className="text-sm font-medium text-gray-700 dark:text-gray-300">Current Status *</label>
@@ -313,6 +334,7 @@ export default function ApplyClient() {
                       >
                         <option value="Final Year College Student">Final Year College Student</option>
                         <option value="Working Professional">Working Professional</option>
+                        <option value="None of the above">None of the above</option>
                       </select>
                     </div>
                   </div>
