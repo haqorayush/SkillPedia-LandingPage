@@ -180,7 +180,7 @@ export default function TeamSection() {
               Join our next batch and get mentored directly by our world-class team of instructors and industry professionals.
             </p>
             <Link
-              href="/"
+              href="/apply"
               className="inline-flex items-center space-x-3 px-8 py-4 rounded-full bg-[#FF7A00] hover:bg-[#FF9E40] text-white font-semibold text-sm tracking-wider uppercase transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(255,122,0,0.4)]"
             >
               <span>Apply Now</span>

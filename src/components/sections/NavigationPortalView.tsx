@@ -173,31 +173,12 @@ export default function NavigationPortalView({
       {/* TOP BAR */}
       {/* ============================================================ */}
       <header className="relative z-30 w-full px-6 sm:px-12 py-8 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center group relative z-30">
-          <div className="w-36 sm:w-44 h-10 relative drop-shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-transform duration-300 group-hover:scale-105">
-            <Image
-              src="/logo.svg"
-              alt="SkillPedia Logo"
-              fill
-              priority
-              className="object-contain object-left"
-            />
-          </div>
-        </Link>
+        {/* Logo Removed */}
 
         {/* Right Controls */}
         <div className="flex items-center space-x-6 sm:space-x-10 text-xs sm:text-sm tracking-wider uppercase font-medium">
 
-          {/* Close Button */}
-          <button
-            onClick={handleClose}
-            className="group relative flex flex-col items-center justify-center text-white hover:text-[#A3E635] transition-colors py-1 cursor-pointer"
-            aria-label="Close portal navigation"
-          >
-            <span className="tracking-widest font-semibold text-xs sm:text-sm">CLOSE</span>
-            <span className="h-[2px] w-full bg-white/60 group-hover:bg-[#A3E635] transition-all duration-300 mt-0.5 rounded-full" />
-          </button>
+          {/* Close Button Removed */}
         </div>
       </header>
 
@@ -298,73 +279,8 @@ export default function NavigationPortalView({
         </div>
       </main>
 
-      {/* ============================================================ */}
-      {/* BOTTOM BAR: SOCIAL LINKS & STAT WIDGET */}
-      {/* ============================================================ */}
-      <footer className="relative z-30 w-full px-6 sm:px-12 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        {/* Left: Social Icons */}
-        <div className="flex items-center space-x-5 text-white/70">
-          <Link
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-200 py-1 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-          >
-            <FaLinkedinIn className="w-5 h-5" />
-          </Link>
-          <span className="text-white/20">•</span>
-          <Link
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-200 py-1 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-          >
-            <FaXTwitter className="w-5 h-5" />
-          </Link>
-          <span className="text-white/20">•</span>
-          <Link
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-200 py-1 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-          >
-            <FaGithub className="w-5 h-5" />
-          </Link>
-          <span className="text-white/20">•</span>
-          <Link
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-200 py-1 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-          >
-            <FaInstagram className="w-5 h-5" />
-          </Link>
-        </div>
-
-        {/* Right: Dynamic Stat Badge */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeItem}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.25 }}
-            className="flex items-center space-x-3 bg-white/5 hover:bg-white/10 backdrop-blur-xl border border-white/15 px-4 py-2 rounded-full transition-all duration-300 shadow-xl group"
-          >
-            <div className="w-6 h-6 rounded-full bg-white text-[#071340] flex items-center justify-center font-bold text-xs shadow-md group-hover:rotate-90 transition-transform duration-300">
-              <Plus className="w-3.5 h-3.5" />
-            </div>
-            <div className="flex flex-col text-right sm:text-left">
-              <span className="font-mono text-xs font-bold text-white tracking-wide">
-                {activeContent.statValue}
-              </span>
-              <span className="text-[10px] text-gray-400 font-sans tracking-tight">
-                {activeContent.statLabel}
-              </span>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </footer>
+      {/* BOTTOM BAR REMOVED */}
+      {/* Footer Removed */}
     </div>
   );
 }

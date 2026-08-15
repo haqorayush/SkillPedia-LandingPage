@@ -14,6 +14,8 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
+  const isDarkHeader = (pathname === '/' || pathname === '/about') && !isScrolled;
+
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
@@ -94,10 +96,7 @@ export default function Navbar() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-8">
             {NAV_LINKS?.map((link) => {
-              const hrefId = link.href.replace('#', '').replace('/', '');
-              const isActive =
-                pathname === link.href ||
-                (pathname === '/' && (activeSection === hrefId || (activeSection === 'about' && link.href === '/about')));
+              const isActive = pathname === link.href;
               
               return (
                 <Link
@@ -105,8 +104,8 @@ export default function Navbar() {
                   href={link.href}
                   className={`text-sm font-medium transition-colors ${
                     isActive
-                      ? (isScrolled ? 'text-blue-600 dark:text-white font-semibold' : 'text-white font-semibold')
-                      : (isScrolled ? 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400' : 'text-gray-300 hover:text-white')
+                      ? (!isDarkHeader ? 'text-blue-600 dark:text-white font-semibold' : 'text-white font-semibold')
+                      : (!isDarkHeader ? 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400' : 'text-gray-300 hover:text-white')
                   }`}
                 >
                   {link.label}
@@ -143,7 +142,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-3 md:hidden z-50">
             <ThemeToggle />
             <button
-              className={`p-2 relative ${isScrolled ? 'text-gray-700 dark:text-white' : 'text-white'}`}
+              className={`p-2 relative ${!isDarkHeader ? 'text-gray-700 dark:text-white' : 'text-white'}`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle mobile menu"
             >
@@ -181,10 +180,7 @@ export default function Navbar() {
           >
             <div className="flex flex-col space-y-6 flex-grow">
               {NAV_LINKS?.map((link) => {
-                const hrefId = link.href.replace('#', '').replace('/', '');
-                const isActive =
-                  pathname === link.href ||
-                  (pathname === '/' && (activeSection === hrefId || (activeSection === 'about' && link.href === '/about')));
+                const isActive = pathname === link.href;
 
                 return (
                   <Link

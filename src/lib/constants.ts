@@ -15,11 +15,8 @@ export const BRAND = {
 // =============================================
 
 export const NAV_LINKS = [
-  { label: "About", href: "/about" },
-  { label: "Programs", href: "/#why-skillpedia" },
-  { label: "Curriculum", href: "/#roadmap" },
-  { label: "Projects", href: "/#projects" },
-  { label: "Careers", href: "/#careers" },
+  { label: "Home", href: "/" },
+  { label: "Programs", href: "/programs" },
   { label: "Contact", href: "/about" },
 ] as const;
 
@@ -434,14 +431,15 @@ export const FAQ_ITEMS = [
 
 export const FOOTER_LINKS = {
   programs: [
-    { label: "Full Stack Engineering", href: "/#roadmap" },
-    { label: "AI & ML Development", href: "/#roadmap" },
-    { label: "Career Acceleration", href: "/#careers" },
+    { label: "Full Stack Engineering", href: "/programs/full-stack-engineering" },
+    { label: "AI & ML Development", href: "/programs/ai-ml-development" },
+    { label: "Software testing and Cybersecurity", href: "/programs/software-testing-cybersecurity" },
+    { label: "Career Acceleration", href: "/programs/career-acceleration" },
   ],
   company: [
     { label: "About Us", href: "/about" },
-    { label: "Our Method", href: "/#learning-flow" },
-    { label: "Success Stories", href: "/#testimonials" },
+    { label: "Vision and Mission", href: "/vision-mission" },
+    { label: "Message from the CEO", href: "/ceo-message" },
   ],
   resources: [
     { label: "Curriculum", href: "/#roadmap" },
@@ -449,9 +447,9 @@ export const FOOTER_LINKS = {
     { label: "FAQ", href: "/#faq" },
   ],
   legal: [
-    { label: "Privacy Policy", href: "/#" },
-    { label: "Terms of Service", href: "/#" },
-    { label: "Refund Policy", href: "/#" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "Refund Policy", href: "/refund-policy" },
   ],
 } as const;
 
@@ -460,4 +458,47 @@ export const SOCIAL_LINKS = [
   { label: "LinkedIn", href: "#", icon: "linkedin" },
   { label: "Instagram", href: "#", icon: "instagram" },
   { label: "YouTube", href: "#", icon: "youtube" },
+] as const;
+
+// =============================================
+// PROGRAMS (Programs Page)
+// =============================================
+
+export const PROGRAMS_LIST = [
+  {
+    id: "full-stack-engineering",
+    title: "Full Stack Engineering",
+    description: "Master both frontend and backend development. Build scalable web applications from scratch using modern frameworks and databases.",
+    href: "/programs/full-stack-engineering",
+    icon: "💻",
+    color: "#3B82F6",
+    tags: ["React", "Node.js", "System Design", "Cloud"],
+  },
+  {
+    id: "ai-ml-development",
+    title: "AI & ML Development",
+    description: "Dive deep into artificial intelligence and machine learning. Learn to build intelligent models, work with LLMs, and deploy AI applications.",
+    href: "/programs/ai-ml-development",
+    icon: "🤖",
+    color: "#FF7A00",
+    tags: ["Python", "TensorFlow", "LLMs", "Data Science"],
+  },
+  {
+    id: "software-testing-cybersecurity",
+    title: "Software testing and Cybersecurity",
+    description: "Ensure the reliability and security of applications. Learn automated testing, ethical hacking, and secure coding practices.",
+    href: "/programs/software-testing-cybersecurity",
+    icon: "🛡️",
+    color: "#10B981",
+    tags: ["QA", "Penetration Testing", "Security", "Automation"],
+  },
+  {
+    id: "career-acceleration",
+    title: "Career Acceleration",
+    description: "Prepare for your dream job with mock interviews, resume reviews, portfolio building, and comprehensive placement support.",
+    href: "/programs/career-acceleration",
+    icon: "🚀",
+    color: "#8B5CF6",
+    tags: ["Interviews", "Resume", "Portfolio", "Placements"],
+  }
 ] as const;

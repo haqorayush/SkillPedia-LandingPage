@@ -3,6 +3,7 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { motion, useTransform, useMotionValue } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 // Dynamically import Three.js scene to avoid SSR issues
 const HeroScene = dynamic(() => import('@/components/3d/HeroScene'), { ssr: false });
@@ -105,23 +106,27 @@ export default function HeroSection() {
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               className="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto"
             >
-              <motion.button 
-                type="button"
-                whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(255, 122, 0, 0.4)" }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-[#FF7A00] text-white rounded-full px-8 py-4 font-medium"
-              >
-                Apply Now
-              </motion.button>
+              <Link href="/apply" passHref>
+                <motion.button 
+                  type="button"
+                  whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(255, 122, 0, 0.4)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#FF7A00] text-white rounded-full px-8 py-4 font-medium"
+                >
+                  Apply Now
+                </motion.button>
+              </Link>
               
-              <motion.button 
-                type="button"
-                whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-transparent border border-white/30 dark:border-blue-400/40 text-white dark:text-blue-100 hover:bg-white/10 dark:hover:bg-blue-500/20 rounded-full px-8 py-4 font-medium transition-colors"
-              >
-                Explore Curriculum
-              </motion.button>
+              <Link href="/programs" className="block">
+                <motion.button 
+                  type="button"
+                  whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-transparent border border-white/30 dark:border-blue-400/40 text-white dark:text-blue-100 hover:bg-white/10 dark:hover:bg-blue-500/20 rounded-full px-8 py-4 font-medium transition-colors"
+                >
+                  Explore Curriculum
+                </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
         </div>

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function CTASection() {
   const [particles, setParticles] = useState<Array<{width: string; height: string; left: string; top: string; duration: number}>>([]);
@@ -67,13 +68,12 @@ export default function CTASection() {
             Join the community of elite developers and accelerate your journey with industry-aligned projects.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto">
-            <button type="button" className="px-8 py-4 bg-[#FF7A00] text-white rounded-xl font-semibold text-lg hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,122,0,0.4)] hover:shadow-[0_0_30px_rgba(255,122,0,0.6)]">
-              Apply Now
-            </button>
-            <button type="button" className="px-8 py-4 bg-transparent border-2 border-white dark:border-blue-400/50 text-white dark:text-blue-100 hover:bg-white/10 dark:hover:bg-blue-500/20 transition-colors duration-300">
-              Book a Counselling Session
-            </button>
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto justify-center">
+            <Link href="/apply" passHref>
+              <button type="button" className="px-8 py-4 bg-[#FF7A00] text-white rounded-xl font-semibold text-lg hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,122,0,0.4)] hover:shadow-[0_0_30px_rgba(255,122,0,0.6)]">
+                Apply Now
+              </button>
+            </Link>
           </div>
         </motion.div>
       </div>
