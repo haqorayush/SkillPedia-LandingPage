@@ -41,15 +41,6 @@ const TEAM_MEMBERS: TeamMember[] = [
       "As Managing Director, Ayush brings over 3 years of experience as a Software and AI Developer. He architects SkillPedia's vision, technology stack, and growth strategy — ensuring every student receives a truly top-tier learning experience. His hands-on expertise in large-scale distributed systems, production-grade code review, and agile product development shapes the backbone of SkillPedia's curriculum.",
   },
   {
-    name: "Line",
-    title: "Head of HR & Communications",
-    role: "People & Culture",
-    photo: "/images/team/Line.png",
-    highlight: "5+ Years · HR & Tech Recruitment",
-    description:
-      "Line brings over 5 years of communication expertise in Human Resources and Technical Recruitment. At SkillPedia, she leads talent operations, student engagement, and industry partnership communications. Her deep understanding of corporate hiring pipelines and professional communication standards ensures SkillPedia students are not just technically proficient, but also articulate, interview-ready, and corporate-polished.",
-  },
-  {
     name: "Aniket",
     title: "Head of Operations",
     role: "QA & EdTech",
@@ -57,6 +48,15 @@ const TEAM_MEMBERS: TeamMember[] = [
     highlight: "5+ Years · IT & EdTech",
     description:
       "Aniket is SkillPedia's automation testing powerhouse, carrying over 5 years of hands-on experience across the IT and EdTech industries. Specializing in Selenium, Appium, CI/CD pipelines, and test framework architecture, he transforms complex testing methodologies into intuitive, project-based learning modules. His industry-tested approach ensures students graduate with practical expertise in quality assurance workflows used by leading tech companies worldwide.",
+  },
+  {
+    name: "Line",
+    title: "Head of HR & Communications",
+    role: "People & Culture",
+    photo: "/images/team/Line.png",
+    highlight: "5+ Years · HR & Tech Recruitment",
+    description:
+      "Line brings over 5 years of communication expertise in Human Resources and Technical Recruitment. At SkillPedia, she leads talent operations, student engagement, and industry partnership communications. Her deep understanding of corporate hiring pipelines and professional communication standards ensures SkillPedia students are not just technically proficient, but also articulate, interview-ready, and corporate-polished.",
   },
   {
     name: "Lavli Pandey",
@@ -163,23 +163,23 @@ export default function TeamSection() {
           viewport={{ once: true, margin: "-80px" }}
           className="max-w-6xl mx-auto"
         >
-          {/* Leadership Row — 2 cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            {TEAM_MEMBERS.slice(0, 2).map((member) => (
+          {/* Leadership Row — 1 card */}
+          <div className="grid grid-cols-1 gap-8 mb-8 max-w-sm mx-auto">
+            {TEAM_MEMBERS.slice(0, 1).map((member) => (
               <TeamCard key={member.name} member={member} isLeadership />
             ))}
           </div>
 
           {/* Core Team Row 1 — 3 cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            {TEAM_MEMBERS.slice(2, 5).map((member) => (
+            {TEAM_MEMBERS.slice(1, 4).map((member) => (
               <TeamCard key={member.name} member={member} />
             ))}
           </div>
 
-          {/* Core Team Row 2 — 2 cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {TEAM_MEMBERS.slice(5).map((member) => (
+          {/* Core Team Row 2 — 3 cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {TEAM_MEMBERS.slice(4).map((member) => (
               <TeamCard key={member.name} member={member} />
             ))}
           </div>
