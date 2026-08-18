@@ -67,6 +67,22 @@ const TEAM_MEMBERS: TeamMember[] = [
     description:
       "With over 3 years of experience as a Pre-basic communication trainer, Lavli brings exceptional communication mastery to SkillPedia's foundational training programs. She specializes in building strong verbal and written communication skills from the ground up — empowering students who are early in their journey to develop the confidence, clarity, and professional communication abilities essential for cracking interviews and thriving in corporate environments.",
   },
+  {
+    name: "Saurabh Pathak",
+    title: "Backend Developer",
+    role: "Backend Development",
+    photo: "/images/team/Saurabh.png",
+    highlight: "3+ Years · Backend Development",
+    description: "Saurabh is a seasoned Backend Developer with over 3 years of experience building robust backend systems for a Malaysia-based company. His expertise ensures that our students gain real-world insights into scalable architectures, API development, and modern backend practices.",
+  },
+  {
+    name: "Sumit Kumar",
+    title: "SDET",
+    role: "Manual, ETL, Mobile & API Testing",
+    photo: "/images/team/Sumit.png",
+    highlight: "3+ Years · SDET at NPCI India",
+    description: "Sumit is a highly skilled Software Development Engineer in Test (SDET) with over 3 years of experience at NPCI India. His comprehensive knowledge spans Manual, ETL, Mobile, and API testing, bringing an industry-leading standard of quality assurance to our training programs.",
+  },
 ];
 
 const containerVariants = {
@@ -154,9 +170,16 @@ export default function TeamSection() {
             ))}
           </div>
 
-          {/* Core Team Row — 3 cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TEAM_MEMBERS.slice(2).map((member) => (
+          {/* Core Team Row 1 — 3 cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            {TEAM_MEMBERS.slice(2, 5).map((member) => (
+              <TeamCard key={member.name} member={member} />
+            ))}
+          </div>
+
+          {/* Core Team Row 2 — 2 cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {TEAM_MEMBERS.slice(5).map((member) => (
               <TeamCard key={member.name} member={member} />
             ))}
           </div>
