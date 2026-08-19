@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import VisionMissionClient from './VisionMissionClient';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Vision & Mission | SkillPedia',
@@ -9,11 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default function VisionMissionPage() {
-  return (
-    <>
-      <Navbar />
-      <VisionMissionClient />
-      <Footer />
-    </>
-  );
+  return <VisionMissionClient />;
 }
+

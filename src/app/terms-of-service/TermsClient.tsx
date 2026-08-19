@@ -48,7 +48,7 @@ export default function TermsClient() {
 
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-12 mb-6">1. Agreement to Terms</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-8">
-              By accessing the website at <a href="https://skillpedia-home.vercel.app" className="text-blue-600 dark:text-blue-400 hover:underline">skillpedia-home.vercel.app</a>, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
+              By accessing the website at <a href="https://skillpedia.co.in" className="text-blue-600 dark:text-blue-400 hover:underline">skillpedia.co.in</a>, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-12 mb-6">2. Intellectual Property Rights</h2>
@@ -72,7 +72,7 @@ export default function TermsClient() {
 
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-12 mb-6">4. Program Enrollment & Payments</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-8">
-              Enrollment in SkillPedia programs is subject to acceptance by our admissions team. Payment for programs must be made in accordance with the terms specified during the enrollment process. For information regarding refunds, please refer to our separate Refund Policy.
+              Enrollment in SkillPedia programs is subject to acceptance by our admissions team. Payment for programs must be made in accordance with the terms specified during the enrollment process. For information regarding refunds, please refer to <Link href="/refund-policy" className="text-blue-600 dark:text-blue-400 hover:underline">our separate Refund Policy</Link>.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-12 mb-6">5. Termination</h2>

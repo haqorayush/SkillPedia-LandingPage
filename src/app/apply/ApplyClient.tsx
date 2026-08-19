@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PROGRAMS_LIST } from '@/lib/constants';
-import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, Loader2, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { COUNTRY_CODES } from '@/lib/countryCodes';
@@ -211,20 +211,23 @@ export default function ApplyClient() {
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <div className="space-y-2 md:col-span-1">
                       <label htmlFor="prefix" className="text-sm font-medium text-gray-700 dark:text-gray-300">Prefix *</label>
-                      <select 
-                        id="prefix"
-                        name="prefix"
-                        required
-                        value={formData.prefix}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none"
-                      >
-                        <option value="Mr.">Mr.</option>
-                        <option value="Ms.">Ms.</option>
-                        <option value="Mrs.">Mrs.</option>
-                        <option value="Dr.">Dr.</option>
-                        <option value="Prof.">Prof.</option>
-                      </select>
+                      <div className="relative">
+                        <select 
+                          id="prefix"
+                          name="prefix"
+                          required
+                          value={formData.prefix}
+                          onChange={handleChange}
+                          className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl pl-4 pr-10 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
+                        >
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Mr.">Mr.</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Ms.">Ms.</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Mrs.">Mrs.</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Dr.">Dr.</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Prof.">Prof.</option>
+                        </select>
+                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" aria-hidden="true" />
+                      </div>
                     </div>
                     <div className="space-y-2 md:col-span-3">
                       <label htmlFor="name" className="text-sm font-medium text-gray-700 dark:text-gray-300">Full Name *</label>
@@ -245,20 +248,23 @@ export default function ApplyClient() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="gender" className="text-sm font-medium text-gray-700 dark:text-gray-300">Gender *</label>
-                      <select 
-                        id="gender"
-                        name="gender"
-                        required
-                        value={formData.gender}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none"
-                      >
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Non-Binary">Non-Binary</option>
-                        <option value="Prefer not to say">Prefer not to say</option>
-                        <option value="Other">Other</option>
-                      </select>
+                      <div className="relative">
+                        <select 
+                          id="gender"
+                          name="gender"
+                          required
+                          value={formData.gender}
+                          onChange={handleChange}
+                          className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl pl-4 pr-10 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
+                        >
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Male">Male</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Female">Female</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Non-Binary">Non-Binary</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Prefer not to say">Prefer not to say</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Other">Other</option>
+                        </select>
+                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" aria-hidden="true" />
+                      </div>
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">Email Address *</label>
@@ -283,10 +289,12 @@ export default function ApplyClient() {
                         <span className="text-lg mr-2 select-none" title="Country Flag">{getFlagEmoji(formData.countryCode)}</span>
                         <input 
                           type="text" 
+                          id="countryCode"
                           name="countryCode"
+                          aria-label="Country Calling Code"
                           value={formData.countryCode}
                           onChange={handleChange}
-                          className="w-12 bg-transparent text-gray-900 dark:text-white focus:outline-none p-0 border-none"
+                          className="w-16 bg-transparent text-gray-900 dark:text-white focus:outline-none p-0 border-none text-sm"
                           placeholder="+1"
                         />
                       </div>
@@ -307,35 +315,41 @@ export default function ApplyClient() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="qualification" className="text-sm font-medium text-gray-700 dark:text-gray-300">Highest Qualification *</label>
-                      <select 
-                        id="qualification"
-                        name="qualification"
-                        required
-                        value={formData.qualification}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none"
-                      >
-                        <option value="High School">High School</option>
-                        <option value="Undergraduate">Undergraduate</option>
-                        <option value="Postgraduate">Postgraduate</option>
-                        <option value="PhD / Doctorate">PhD / Doctorate</option>
-                        <option value="Other">Other</option>
-                      </select>
+                      <div className="relative">
+                        <select 
+                          id="qualification"
+                          name="qualification"
+                          required
+                          value={formData.qualification}
+                          onChange={handleChange}
+                          className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl pl-4 pr-10 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
+                        >
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="High School">High School</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Undergraduate">Undergraduate</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Postgraduate">Postgraduate</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="PhD / Doctorate">PhD / Doctorate</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Other">Other</option>
+                        </select>
+                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" aria-hidden="true" />
+                      </div>
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="status" className="text-sm font-medium text-gray-700 dark:text-gray-300">Current Status *</label>
-                      <select 
-                        id="status"
-                        name="status"
-                        required
-                        value={formData.status}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none"
-                      >
-                        <option value="Final Year College Student">Final Year College Student</option>
-                        <option value="Working Professional">Working Professional</option>
-                        <option value="None of the above">None of the above</option>
-                      </select>
+                      <div className="relative">
+                        <select 
+                          id="status"
+                          name="status"
+                          required
+                          value={formData.status}
+                          onChange={handleChange}
+                          className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl pl-4 pr-10 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
+                        >
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Final Year College Student">Final Year College Student</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Working Professional">Working Professional</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="None of the above">None of the above</option>
+                        </select>
+                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" aria-hidden="true" />
+                      </div>
                     </div>
                   </div>
 
@@ -343,39 +357,45 @@ export default function ApplyClient() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="program" className="text-sm font-medium text-gray-700 dark:text-gray-300">Program of Interest *</label>
-                      <select 
-                        id="program"
-                        name="program"
-                        required
-                        value={formData.program}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none"
-                      >
-                        {PROGRAMS_LIST.map(p => (
-                          <option key={p.id} value={p.title}>{p.title}</option>
-                        ))}
-                      </select>
+                      <div className="relative">
+                        <select 
+                          id="program"
+                          name="program"
+                          required
+                          value={formData.program}
+                          onChange={handleChange}
+                          className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl pl-4 pr-10 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
+                        >
+                          {PROGRAMS_LIST.map(p => (
+                            <option key={p.id} value={p.title} className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white">{p.title}</option>
+                          ))}
+                        </select>
+                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" aria-hidden="true" />
+                      </div>
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="expertise" className="text-sm font-medium text-gray-700 dark:text-gray-300">Level of Expertise *</label>
-                      <select 
-                        id="expertise"
-                        name="expertise"
-                        required
-                        value={formData.expertise}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none"
-                      >
-                        <option value="Beginner">Beginner</option>
-                        <option value="Intermediate">Intermediate</option>
-                        <option value="Advanced">Advanced</option>
-                      </select>
+                      <div className="relative">
+                        <select 
+                          id="expertise"
+                          name="expertise"
+                          required
+                          value={formData.expertise}
+                          onChange={handleChange}
+                          className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl pl-4 pr-10 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
+                        >
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Beginner">Beginner</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Intermediate">Intermediate</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Advanced">Advanced</option>
+                        </select>
+                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" aria-hidden="true" />
+                      </div>
                     </div>
                   </div>
 
                   {/* Address Fields */}
                   <div className="space-y-4">
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Full Address *</label>
+                    <label htmlFor="street" className="text-sm font-medium text-gray-700 dark:text-gray-300">Full Address *</label>
                     <input 
                       type="text" 
                       id="street"
@@ -389,7 +409,9 @@ export default function ApplyClient() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <input 
                         type="text" 
+                        id="city"
                         name="city"
+                        aria-label="City"
                         required
                         value={formData.city}
                         onChange={handleChange}
@@ -398,7 +420,9 @@ export default function ApplyClient() {
                       />
                       <input 
                         type="text" 
+                        id="state"
                         name="state"
+                        aria-label="State or Province"
                         required
                         value={formData.state}
                         onChange={handleChange}
@@ -409,7 +433,9 @@ export default function ApplyClient() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <input 
                         type="text" 
+                        id="country"
                         name="country"
+                        aria-label="Country"
                         required
                         value={formData.country}
                         onChange={handleChange}
@@ -418,7 +444,9 @@ export default function ApplyClient() {
                       />
                       <input 
                         type="text" 
+                        id="zipcode"
                         name="zipcode"
+                        aria-label="ZIP or Postal Code"
                         required
                         value={formData.zipcode}
                         onChange={handleChange}
@@ -446,35 +474,41 @@ export default function ApplyClient() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="source" className="text-sm font-medium text-gray-700 dark:text-gray-300">Where did you hear about us? *</label>
-                      <select 
-                        id="source"
-                        name="source"
-                        required
-                        value={formData.source}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none"
-                      >
-                        <option value="" disabled>Select an option</option>
-                        <option value="LinkedIn">LinkedIn</option>
-                        <option value="Google Search">Google Search</option>
-                        <option value="Friend/Colleague">Friend/Colleague</option>
-                        <option value="Social Media">Social Media</option>
-                        <option value="Other">Other</option>
-                      </select>
+                      <div className="relative">
+                        <select 
+                          id="source"
+                          name="source"
+                          required
+                          value={formData.source}
+                          onChange={handleChange}
+                          className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl pl-4 pr-10 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
+                        >
+                          <option value="" disabled className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white">Select an option</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="LinkedIn">LinkedIn</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Google Search">Google Search</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Friend/Colleague">Friend/Colleague</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Social Media">Social Media</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Other">Other</option>
+                        </select>
+                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" aria-hidden="true" />
+                      </div>
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="needsCounseling" className="text-sm font-medium text-gray-700 dark:text-gray-300">Need a counseling session? *</label>
-                      <select 
-                        id="needsCounseling"
-                        name="needsCounseling"
-                        required
-                        value={formData.needsCounseling}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none"
-                      >
-                        <option value="Yes, please arrange one">Yes, please arrange one</option>
-                        <option value="No, I have decided">No, I have decided</option>
-                      </select>
+                      <div className="relative">
+                        <select 
+                          id="needsCounseling"
+                          name="needsCounseling"
+                          required
+                          value={formData.needsCounseling}
+                          onChange={handleChange}
+                          className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl pl-4 pr-10 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
+                        >
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="Yes, please arrange one">Yes, please arrange one</option>
+                          <option className="bg-white dark:bg-[#0B1F5E] text-gray-900 dark:text-white" value="No, I have decided">No, I have decided</option>
+                        </select>
+                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" aria-hidden="true" />
+                      </div>
                     </div>
                   </div>
 
@@ -522,7 +556,7 @@ export default function ApplyClient() {
                     )}
                   </button>
 
-                  <p className="text-xs text-gray-500 text-center pt-4">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 text-center pt-4">
                     By submitting this form, you agree to our <Link href="/privacy-policy" className="hover:text-gray-700 dark:hover:text-gray-300 underline underline-offset-2">Privacy Policy</Link> and <Link href="/terms-of-service" className="hover:text-gray-700 dark:hover:text-gray-300 underline underline-offset-2">Terms of Service</Link>.
                   </p>
 

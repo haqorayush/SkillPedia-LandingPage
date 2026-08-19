@@ -1,4 +1,8 @@
 "use client";
+import { 
+  MonitorOff, FolderX, Archive, GraduationCap, UserX, 
+  Terminal, Rocket, Bot, Target, Briefcase, Users, LucideIcon 
+} from 'lucide-react';
 
 import { motion } from "framer-motion";
 import { COMPARISON_TRADITIONAL, COMPARISON_SKILLPEDIA } from "@/lib/constants";
@@ -22,6 +26,12 @@ const itemLeftVariants = {
 const itemRightVariants = {
   hidden: { opacity: 0, x: 20 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.5, type: "spring" as const, stiffness: 100 } },
+};
+
+
+const ICON_MAP: Record<string, LucideIcon> = {
+  MonitorOff, FolderX, Archive, GraduationCap, UserX,
+  Terminal, Rocket, Bot, Target, Briefcase, Users
 };
 
 export default function WhySkillPediaSection() {
@@ -63,7 +73,14 @@ export default function WhySkillPediaSection() {
                   variants={itemLeftVariants}
                   className="flex items-center gap-4 text-gray-600 dark:text-gray-300 font-[family-name:var(--font-body)] p-4 rounded-xl bg-white dark:bg-[#071340]/60 shadow-sm border border-gray-100 dark:border-white/10 opacity-80 grayscale hover:grayscale-0 transition-all"
                 >
-                  <span className="text-2xl bg-gray-100 dark:bg-white/10 p-2 rounded-lg flex-shrink-0" aria-hidden="true">{item.icon}</span>
+                  {(() => {
+                    const Icon = ICON_MAP[item.iconName as string];
+                    return (
+                      <span className="w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center bg-gray-100 dark:bg-[#0B1F5E] text-gray-500" aria-hidden="true">
+                        {Icon && <Icon className="w-6 h-6" />}
+                      </span>
+                    );
+                  })()}
                   <span className="text-lg">{item.label}</span>
                 </motion.li>
               ))}
@@ -119,7 +136,14 @@ export default function WhySkillPediaSection() {
                   whileHover={{ scale: 1.02, x: 5 }}
                   className="flex items-center gap-4 text-[#0B1F5E] dark:text-white font-[family-name:var(--font-body)] font-medium p-4 rounded-xl bg-white/80 dark:bg-[#0B1F5E]/90 backdrop-blur-md shadow-md border border-white/50 dark:border-blue-500/20"
                 >
-                  <span className="text-2xl bg-blue-100 dark:bg-blue-500/20 p-2 rounded-lg flex-shrink-0 shadow-sm" aria-hidden="true">{item.icon}</span>
+                  {(() => {
+                    const Icon = ICON_MAP[item.iconName as string];
+                    return (
+                      <span className="w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-500/30" aria-hidden="true">
+                        {Icon && <Icon className="w-6 h-6" />}
+                      </span>
+                    );
+                  })()}
                   <span className="text-lg">{item.label}</span>
                 </motion.li>
               ))}

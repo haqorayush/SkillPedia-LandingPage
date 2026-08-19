@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { MessageSquareQuote, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
@@ -68,16 +69,18 @@ export default function CeoClient() {
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#3B82F6] to-[#FF7A00] rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
                 <div className="relative bg-white dark:bg-[#0B1F5E] p-4 rounded-3xl border border-gray-100 dark:border-white/5 shadow-2xl">
-                  <div className="aspect-square rounded-2xl overflow-hidden bg-gray-100 dark:bg-[#071340]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img 
-                      src="/images/team/Dharmendra.png" 
+                  <div className="aspect-square rounded-2xl overflow-hidden bg-gray-100 dark:bg-[#071340] relative">
+                    <Image 
+                      src="/images/team/Dharmendra.webp" 
                       alt="Dharmendra Kumar Pandey"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 384px"
+                      priority
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                   <div className="p-6 text-center">
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Dharmendra K. Pandey</h3>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Dharmendra K. Pandey</h2>
                     <p className="text-[#FF7A00] font-medium">Founder & CEO</p>
                   </div>
                 </div>
@@ -104,7 +107,7 @@ export default function CeoClient() {
                 </p>
 
                 <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                  Our philosophy is simple. We don't just teach you how to write code; we teach you how to think like an engineer, how to architect robust solutions, and how to communicate your ideas effectively. Whether you are learning Full Stack Engineering, diving into AI & ML, mastering Software Testing, or refining your soft skills in our Career Acceleration program, you are getting an elite, production-grade education.
+                  Our philosophy is simple. We don&apos;t just teach you how to write code; we teach you how to think like an engineer, how to architect robust solutions, and how to communicate your ideas effectively. Whether you are learning Full Stack Engineering, diving into AI & ML, mastering Software Testing, or refining your soft skills in our Career Acceleration program, you are getting an elite, production-grade education.
                 </p>
 
                 <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
@@ -112,7 +115,7 @@ export default function CeoClient() {
                 </p>
 
                 <p className="text-gray-600 dark:text-gray-300 mb-10 leading-relaxed">
-                  I am incredibly proud of the community we are building here. When you join SkillPedia, you aren't just taking a course—you are taking a definitive step toward a thriving, lifelong career in technology. Let's build the future together.
+                  I am incredibly proud of the community we are building here. When you join SkillPedia, you aren&apos;t just taking a course—you are taking a definitive step toward a thriving, lifelong career in technology. Let&apos;s build the future together.
                 </p>
 
                 <div className="border-t border-gray-200 dark:border-white/10 pt-8 mt-8 flex flex-col sm:flex-row items-center justify-between gap-6">

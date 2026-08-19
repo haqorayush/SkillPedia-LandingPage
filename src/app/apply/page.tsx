@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import ApplyClient from './ApplyClient';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Apply Now | SkillPedia',
@@ -9,11 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default function ApplyPage() {
-  return (
-    <>
-      <Navbar />
-      <ApplyClient />
-      <Footer />
-    </>
-  );
+  return <ApplyClient />;
 }
+

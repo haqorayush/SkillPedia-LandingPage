@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import CeoClient from './CeoClient';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Message from the CEO | SkillPedia',
@@ -9,11 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default function CeoMessagePage() {
-  return (
-    <>
-      <Navbar />
-      <CeoClient />
-      <Footer />
-    </>
-  );
+  return <CeoClient />;
 }
+

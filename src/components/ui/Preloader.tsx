@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform, animate } from 'framer-motion';
 
 const LOADING_STEPS = [
   "ESTABLISHING SECURE CONNECTION...",
@@ -13,63 +13,85 @@ const LOADING_STEPS = [
 export default function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
   const [stepIndex, setStepIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
+  
+  // High-performance motion values for progress tracking
+  const progress = useMotionValue(0);
+  const progressWidth = useTransform(progress, (v) => `${v}%`);
+  const progressText = useTransform(progress, (v) => `${Math.round(v)}%`);
 
   useEffect(() => {
-    // Lock scroll
+    // Check sessionStorage on mount (client only) to avoid SSR hydration mismatch
+    try {
+      if (sessionStorage.getItem('sp_visited')) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setIsLoading(false);
+        return;
+      }
+    } catch {
+      // Ignore sessionStorage access errors (e.g. private browsing mode)
+    }
+
+    // Lock scroll during initial brief load
     document.body.style.overflow = 'hidden';
 
-    // Simulate progress
-    const duration = 2500; // total duration
-    const interval = 50; // update every 50ms
-    const steps = duration / interval;
-    let currentStep = 0;
-
-    const timer = setInterval(() => {
-      currentStep++;
-      const currentProgress = Math.min((currentStep / steps) * 100, 100);
-      setProgress(currentProgress);
-
-      // Update text step based on progress
-      if (currentProgress < 25) setStepIndex(0);
-      else if (currentProgress < 50) setStepIndex(1);
-      else if (currentProgress < 75) setStepIndex(2);
-      else setStepIndex(3);
-
-      if (currentStep >= steps) {
-        clearInterval(timer);
-        setTimeout(() => {
-          setIsLoading(false);
-          document.body.style.overflow = 'unset';
-        }, 400); // Brief pause at 100%
+    // Start 2.5s hardware-accelerated animation
+    const controls = animate(progress, 100, {
+      duration: 2.5,
+      ease: "linear",
+      onUpdate: (latest) => {
+        // Only update React state (stepIndex) 4 times total, not every frame
+        if (latest < 25) setStepIndex(0);
+        else if (latest < 50) setStepIndex(1);
+        else if (latest < 75) setStepIndex(2);
+        else setStepIndex(3);
+      },
+      onComplete: () => {
+        try {
+          sessionStorage.setItem('sp_visited', 'true');
+        } catch {
+          // Ignore sessionStorage errors
+        }
+        // Trigger the exit animation. (Scroll is unlocked after exit finishes)
+        setIsLoading(false);
       }
-    }, interval);
+    });
 
     return () => {
-      clearInterval(timer);
+      controls.stop();
+      // Failsafe cleanup in case component unmounts early
       document.body.style.overflow = 'unset';
     };
-  }, []);
+  }, [progress]);
+
+  const handleAnimationComplete = () => {
+    // Unlock scroll only AFTER the exit animation finishes
+    if (!isLoading) {
+      document.body.style.overflow = 'unset';
+    }
+  };
 
   return (
     <AnimatePresence>
       {isLoading && (
         <motion.div
+          role="status"
+          aria-live="polite"
           initial={{ opacity: 1 }}
           exit={{ 
             opacity: 0,
-            scale: 1.05,
-            filter: "blur(10px)",
-            transition: { duration: 0.8, ease: "easeInOut" }
+            scale: 1.02,
+            filter: "blur(6px)",
+            transition: { duration: 0.4, ease: "easeInOut" }
           }}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#071340] overflow-hidden"
+          onAnimationComplete={handleAnimationComplete}
+          className="fixed inset-0 z-[9999] pointer-events-auto flex flex-col items-center justify-center bg-[#071340] overflow-hidden"
         >
           {/* Futuristic background glow */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1.2, opacity: 0.3 }}
-              transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+              transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
               className="w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] bg-[#3B82F6] rounded-full blur-[100px]"
             />
           </div>
@@ -77,7 +99,7 @@ export default function Preloader() {
           <div className="relative flex flex-col items-center z-10 w-full max-w-md px-6">
             
             {/* SVG AI Core Graphic */}
-            <div className="relative w-32 h-32 mb-12">
+            <div className="relative w-28 h-28 mb-8">
               <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
                 {/* Outer Ring */}
                 <motion.circle
@@ -99,7 +121,7 @@ export default function Preloader() {
                   strokeWidth="1.5"
                   strokeDasharray="4 8"
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
                   style={{ transformOrigin: "50% 50%" }}
                 />
 
@@ -111,7 +133,7 @@ export default function Preloader() {
                   strokeWidth="1"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 2, ease: "easeInOut" }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
                 />
 
                 {/* Connecting Inner Lines */}
@@ -122,7 +144,7 @@ export default function Preloader() {
                   strokeWidth="0.5"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: 1, opacity: 0.5 }}
-                  transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
+                  transition={{ duration: 0.5, delay: 0.1, ease: "easeInOut" }}
                 />
 
                 {/* Center Core */}
@@ -133,7 +155,7 @@ export default function Preloader() {
                   fill="#FF7A00"
                   initial={{ scale: 0 }}
                   animate={{ scale: [0, 1.2, 1] }}
-                  transition={{ duration: 1, delay: 1 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
                 />
                 <motion.circle
                   cx="50"
@@ -144,7 +166,7 @@ export default function Preloader() {
                   strokeWidth="1"
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: [0, 1.5], opacity: [1, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: 1.2 }}
+                  transition={{ duration: 1, repeat: Infinity, delay: 0.3 }}
                 />
               </svg>
             </div>
@@ -154,10 +176,10 @@ export default function Preloader() {
               <AnimatePresence mode="wait">
                 <motion.p
                   key={stepIndex}
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={{ y: 15, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  exit={{ y: -15, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
                   className="font-[family-name:var(--font-mono-code)] text-xs md:text-sm text-[#60A5FA] tracking-widest text-center"
                 >
                   {LOADING_STEPS[stepIndex]}
@@ -170,15 +192,14 @@ export default function Preloader() {
               {/* Progress Bar Fill */}
               <motion.div
                 className="absolute top-0 left-0 bottom-0 bg-gradient-to-r from-[#3B82F6] to-[#FF7A00]"
-                style={{ width: `${progress}%` }}
-                layoutId="progress-bar"
+                style={{ width: progressWidth }}
               />
             </div>
 
             {/* Percentage */}
-            <div className="mt-4 w-full flex justify-between items-center text-[10px] text-gray-500 font-[family-name:var(--font-mono-code)]">
+            <div className="mt-3 w-full flex justify-between items-center text-[10px] text-gray-500 font-[family-name:var(--font-mono-code)]">
               <span>SYSTEM.INIT</span>
-              <span>{Math.round(progress)}%</span>
+              <motion.span>{progressText}</motion.span>
             </div>
 
           </div>

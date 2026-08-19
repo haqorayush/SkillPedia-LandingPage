@@ -45,7 +45,7 @@ function ProjectCard({ project }: { project: typeof PROJECTS[number] }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.3 }}
-      className={`relative bg-white dark:bg-[#0B1F5E] rounded-2xl p-6 flex flex-col gap-4 border-t-4 border-x border-b border-x-transparent border-b-transparent dark:border-x-white/10 dark:border-b-white/10 shadow-sm hover:shadow-xl dark:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-shadow duration-300`}
+      className={`relative bg-white dark:bg-[#0B1F5E] rounded-2xl p-6 flex flex-col gap-4 border-t-4 border-x border-b border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-xl dark:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-shadow duration-300`}
     >
       <div className="flex justify-between items-start gap-4">
         <h3 className="text-xl font-bold font-[family-name:var(--font-heading)] text-gray-900 dark:text-white leading-tight">{project.title}</h3>

@@ -13,7 +13,7 @@ const SOCIAL_ICONS: Record<string, React.ReactNode> = {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#071340] dark:bg-[#071340] relative pt-20 pb-10 border-t border-white/10 dark:border-blue-500/20 overflow-hidden font-[family-name:var(--font-body)]">
+    <footer className="bg-gray-50 dark:bg-[#071340] relative pt-20 pb-10 border-t border-gray-200 dark:border-white/10 overflow-hidden font-[family-name:var(--font-body)]">
       {/* Subtle top border gradient */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#3B82F6]/50 to-transparent" />
       
@@ -40,14 +40,14 @@ export default function Footer() {
             <div className="text-[#FF7A00] font-bold text-sm tracking-wider">
               {BRAND?.tagline}
             </div>
-            <p className="text-gray-400 dark:text-gray-300 text-sm max-w-sm leading-relaxed mt-2">
+            <p className="text-gray-600 dark:text-gray-300 text-sm max-w-sm leading-relaxed mt-2">
               {BRAND?.description || "India's premium engineering career acceleration platform. We bridge the gap between academia and industry requirements with elite-level training."}
             </p>
             
             {/* Social Links */}
             <div className="flex items-center space-x-4 pt-2">
               {SOCIAL_LINKS.map(link => (
-                <a key={link.label} href={link.href} className="w-10 h-10 rounded-full bg-white/5 dark:bg-white/10 flex items-center justify-center text-gray-400 dark:text-gray-300 hover:bg-[#FF7A00] dark:hover:bg-[#FF7A00] hover:text-white transition-all duration-300" aria-label={link.label}>
+                <a key={link.label} href={link.href} className="w-10 h-10 rounded-full bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/10 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-[#FF7A00] dark:hover:bg-[#FF7A00] hover:text-white dark:hover:text-white transition-all duration-300" aria-label={link.label}>
                   {SOCIAL_ICONS[link.label] || null}
                 </a>
               ))}
@@ -56,13 +56,13 @@ export default function Footer() {
 
           {Object.entries(FOOTER_LINKS).map(([key, links]) => (
             <div key={key} className="flex flex-col space-y-4">
-              <h4 className="text-white font-medium mb-2 font-[family-name:var(--font-heading-display)] capitalize">{key}</h4>
+              <h4 className="text-gray-900 dark:text-white font-medium mb-2 font-[family-name:var(--font-heading-display)] capitalize">{key}</h4>
               <ul className="space-y-3">
-                {links.map((link, linkIdx: number) => (
-                  <li key={linkIdx}>
+                {links.map((link) => (
+                  <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-gray-400 dark:text-gray-300 hover:text-[#FF7A00] text-sm transition-colors duration-200"
+                      className="text-gray-600 dark:text-gray-300 hover:text-[#FF7A00] text-sm transition-colors duration-200"
                     >
                       {link.label}
                     </Link>
@@ -74,16 +74,17 @@ export default function Footer() {
 
           {/* Newsletter Column */}
           <div className="lg:col-span-1 flex flex-col space-y-4">
-            <h4 className="text-white font-medium mb-2 font-[family-name:var(--font-heading)]">Newsletter</h4>
-            <p className="text-gray-400 dark:text-gray-300 text-sm leading-relaxed">
+            <h4 className="text-gray-900 dark:text-white font-medium mb-2 font-[family-name:var(--font-heading)]">Newsletter</h4>
+            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
               Subscribe to get the latest updates on programs and career tips.
             </p>
             <form className="mt-2" onSubmit={(e) => e.preventDefault()}>
               <div className="relative">
                 <input
                   type="email"
+                  aria-label="Email address for newsletter"
                   placeholder="Enter your email"
-                  className="w-full bg-white/5 dark:bg-[#0B1F5E]/80 border border-white/10 dark:border-blue-500/20 rounded-lg px-4 py-3 text-sm text-white dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-[#3B82F6] dark:focus:border-blue-400 transition-colors"
+                  className="w-full bg-white dark:bg-[#0B1F5E]/80 border border-gray-300 dark:border-white/10 rounded-lg px-4 py-3 text-sm text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-[#3B82F6] dark:focus:border-blue-400 transition-colors"
                   required
                 />
                 <button
@@ -99,12 +100,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 dark:border-blue-500/20 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
+        <div className="pt-8 border-t border-gray-200 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-gray-600 dark:text-gray-400 text-sm">
             © {new Date().getFullYear()} SkillPedia. All rights reserved.
           </p>
-          <p className="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-1">
-            Made with <span className="text-red-500 text-lg">❤️</span> in India
+          <p className="text-gray-600 dark:text-gray-400 text-sm flex items-center gap-1">
+            Made with <span className="text-red-500 text-lg" aria-hidden="true">❤️</span> in India
           </p>
         </div>
       </div>

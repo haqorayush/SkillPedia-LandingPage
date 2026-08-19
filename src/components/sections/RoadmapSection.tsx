@@ -42,10 +42,10 @@ export default function RoadmapSection() {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading-display)] text-[#0B1F5E] dark:text-white">
-            12-Week Engineering Roadmap
+            12-Week Transformation Roadmap
           </h2>
           <p className="mt-4 text-gray-600 dark:text-gray-300 font-[family-name:var(--font-body)] text-lg max-w-2xl mx-auto">
-            A structured path from fundamentals to a production-ready software engineer.
+            A structured path from absolute fundamentals to a highly-skilled, job-ready professional.
           </p>
         </motion.div>
 

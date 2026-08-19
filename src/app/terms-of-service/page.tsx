@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import TermsClient from './TermsClient';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Terms of Service | SkillPedia',
@@ -9,11 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default function TermsOfServicePage() {
-  return (
-    <>
-      <Navbar />
-      <TermsClient />
-      <Footer />
-    </>
-  );
+  return <TermsClient />;
 }
+

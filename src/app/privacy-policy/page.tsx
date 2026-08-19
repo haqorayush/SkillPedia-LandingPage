@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import PrivacyClient from './PrivacyClient';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | SkillPedia',
@@ -9,11 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPolicyPage() {
-  return (
-    <>
-      <Navbar />
-      <PrivacyClient />
-      <Footer />
-    </>
-  );
+  return <PrivacyClient />;
 }
+

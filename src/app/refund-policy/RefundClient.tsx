@@ -82,7 +82,7 @@ export default function RefundClient() {
             <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-100 dark:border-white/10">
               <p className="text-gray-900 dark:text-white font-medium mb-2">SkillPedia Support Team</p>
               <p className="text-gray-600 dark:text-gray-300 mb-4">Email: <a href="mailto:smartminds.boa@proton.me" className="text-blue-600 dark:text-blue-400 hover:underline">smartminds.boa@proton.me</a></p>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">Website: <a href="https://skillpedia-home.vercel.app" className="text-blue-600 dark:text-blue-400 hover:underline">skillpedia-home.vercel.app</a></p>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">Website: <a href="https://skillpedia.co.in" className="text-blue-600 dark:text-blue-400 hover:underline">skillpedia.co.in</a></p>
               <Link href="/about" className="text-blue-600 dark:text-blue-400 hover:underline">Or reach out via our Contact Page &rarr;</Link>
             </div>
 

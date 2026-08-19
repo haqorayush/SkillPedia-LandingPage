@@ -1,8 +1,15 @@
 "use client";
 
+import { Target, Compass, Heart, LucideIcon } from 'lucide-react';
+
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { WHO_WE_ARE } from "@/lib/constants";
+
+const ICON_MAP: Record<string, LucideIcon> = {
+  Target, Compass, Heart
+};
+
 
 function TiltCard({ item, index }: { item: typeof WHO_WE_ARE[number]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -47,8 +54,11 @@ function TiltCard({ item, index }: { item: typeof WHO_WE_ARE[number]; index: num
     >
       {/* 3D Inner Content translation */}
       <motion.div style={{ transform: "translateZ(50px)" }} className="flex flex-col items-center">
-        <div aria-hidden="true" className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center text-3xl mb-6 shadow-inner">
-          {item.icon}
+        <div aria-hidden="true" className="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-inner border-4 border-blue-100 dark:border-blue-500/20 bg-gradient-to-br from-blue-50 to-orange-50 dark:from-[#0B1F5E] dark:to-[#071340] text-blue-600 dark:text-blue-400">
+          {(() => {
+            const Icon = ICON_MAP[item.iconName as string];
+            return Icon ? <Icon className="w-8 h-8" strokeWidth={2} /> : null;
+          })()}
         </div>
         <h3 className="text-2xl font-bold text-[#0B1F5E] dark:text-white mb-4 font-[family-name:var(--font-heading)]">
           {item.title}
@@ -60,6 +70,7 @@ function TiltCard({ item, index }: { item: typeof WHO_WE_ARE[number]; index: num
     </motion.div>
   );
 }
+
 
 export default function WhoWeAreSection() {
   return (

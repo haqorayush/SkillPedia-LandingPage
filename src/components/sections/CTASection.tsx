@@ -20,7 +20,7 @@ export default function CTASection() {
     );
   }, []);
   return (
-    <section id="contact" className="scroll-mt-24 relative py-32 bg-[#0B1F5E] dark:bg-[#071340] overflow-hidden">
+    <section id="contact" className="scroll-mt-24 relative py-32 bg-gradient-to-br from-blue-50 via-white to-orange-50 dark:from-[#0B1F5E] dark:via-[#0A194A] dark:to-[#071340] border-y border-gray-200/60 dark:border-white/10 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#FF7A00] rounded-full filter blur-[128px] opacity-20 transform-gpu will-change-transform"></div>
@@ -32,8 +32,8 @@ export default function CTASection() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {particles.map((style, i) => (
           <motion.div
-            key={i}
-            className="absolute rounded-full bg-white/10 transform-gpu will-change-transform"
+            key={i} // Static decorative particles that never reorder
+            className="absolute rounded-full bg-blue-500/20 dark:bg-white/10 transform-gpu will-change-transform"
             style={{
               width: style.width,
               height: style.height,
@@ -61,19 +61,25 @@ export default function CTASection() {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto text-center flex flex-col items-center"
         >
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold font-[family-name:var(--font-heading)] text-white mb-6 tracking-tight">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold font-[family-name:var(--font-heading)] text-gray-900 dark:text-white mb-6 tracking-tight">
             Your Engineering Career Starts Here.
           </h2>
-          <p className="text-xl md:text-2xl text-white/80 dark:text-gray-200 mb-12 max-w-2xl font-light">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-200 mb-12 max-w-2xl font-light">
             Join the community of elite developers and accelerate your journey with industry-aligned projects.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto justify-center">
-            <Link href="/apply" passHref>
-              <button type="button" className="px-8 py-4 bg-[#FF7A00] text-white rounded-xl font-semibold text-lg hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,122,0,0.4)] hover:shadow-[0_0_30px_rgba(255,122,0,0.6)]">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link
+                href="/apply"
+                className="inline-block px-8 py-4 bg-[#FF7A00] text-white rounded-xl font-semibold text-lg transition-transform duration-300 shadow-[0_0_20px_rgba(255,122,0,0.4)] hover:shadow-[0_0_30px_rgba(255,122,0,0.6)] text-center cursor-pointer"
+              >
                 Apply Now
-              </button>
-            </Link>
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </div>

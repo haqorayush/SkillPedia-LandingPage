@@ -1,5 +1,3 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import dynamic from 'next/dynamic';
 
@@ -14,25 +12,21 @@ const TestimonialsSection = dynamic(() => import('@/components/sections/Testimon
 const FAQSection = dynamic(() => import('@/components/sections/FAQSection'), { ssr: true });
 const CTASection = dynamic(() => import('@/components/sections/CTASection'), { ssr: true });
 
-
 export default function HomePage() {
   return (
-    <>
-      <Navbar />
-      <main>
-        <HeroSection />
-        <WhoWeAreSection />
-        <WhySkillPediaSection />
-        <RoadmapSection />
-        <LearningFlowSection />
-        <ProjectsSection />
-        <CareerSection />
-        <StatsSection />
-        <TestimonialsSection />
-        <CTASection />
-        <FAQSection />
-      </main>
-      <Footer />
-    </>
+    <main>
+      <HeroSection />
+      <WhoWeAreSection />
+      <WhySkillPediaSection />
+      <RoadmapSection />
+      <LearningFlowSection />
+      <ProjectsSection />
+      <CareerSection />
+      <StatsSection />
+      <TestimonialsSection />
+      <CTASection />
+      <FAQSection />
+    </main>
   );
 }
+

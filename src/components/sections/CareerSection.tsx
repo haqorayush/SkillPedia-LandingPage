@@ -2,7 +2,8 @@
 
 import React, { useRef } from 'react';
 import { CAREER_MILESTONES } from '@/lib/constants';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
+import Image from 'next/image';
 
 export default function CareerSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -11,8 +12,6 @@ export default function CareerSection() {
     target: containerRef,
     offset: ["start center", "end center"]
   });
-  
-  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <section id="careers" className="scroll-mt-24 py-24 bg-white dark:bg-[#071340] relative overflow-hidden">
@@ -29,13 +28,13 @@ export default function CareerSection() {
           
           {/* Animated Progress Line (Mobile) */}
           <motion.div 
-            style={{ scaleY: scaleProgress, transformOrigin: "top" }}
+            style={{ scaleY: scrollYProgress, transformOrigin: "top" }}
             className="md:hidden absolute left-[27px] md:left-0 md:top-6 bottom-0 md:bottom-auto w-1 md:w-full h-full md:h-1 bg-gradient-to-b from-[#3B82F6] to-[#FF7A00] rounded-full z-0"
           />
           
           {/* Animated Progress Line (Desktop) */}
           <motion.div 
-            style={{ scaleX: scaleProgress, transformOrigin: "left" }}
+            style={{ scaleX: scrollYProgress, transformOrigin: "left" }}
             className="hidden md:block absolute left-[27px] md:left-0 md:top-6 bottom-0 md:bottom-auto w-1 md:w-full h-full md:h-1 bg-gradient-to-r from-[#3B82F6] to-[#FF7A00] rounded-full z-0"
           />
 
@@ -44,7 +43,7 @@ export default function CareerSection() {
               const isLast = index === CAREER_MILESTONES.length - 1;
               return (
                 <motion.div 
-                  key={index}
+                  key={milestone.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
@@ -52,13 +51,13 @@ export default function CareerSection() {
                   className="flex md:flex-col items-start md:items-center gap-6 md:gap-4 flex-1 md:text-center group"
                 >
                   <motion.div 
-                    initial={{ borderColor: "#E5E7EB" }}
+                    initial={{ borderColor: milestone.color }}
                     whileInView={{ borderColor: milestone.color }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.5 }}
-                    className={`w-14 h-14 rounded-full flex items-center justify-center bg-white dark:bg-[#0B1F5E] border-4 shadow-sm dark:border-[#0B1F5E] transition-transform duration-300 ${isLast ? 'shadow-[0_0_20px_rgba(255,122,0,0.5)]' : ''}`}
+                    className={`w-14 h-14 rounded-full flex items-center justify-center bg-white dark:bg-[#0B1F5E] border-4 shadow-sm transition-transform duration-300 overflow-hidden relative ${isLast ? 'shadow-[0_0_20px_rgba(255,122,0,0.5)]' : ''}`}
                   >
-                    <span className="text-xl font-bold text-gray-800 dark:text-white">{index + 1}</span>
+                    <Image src={milestone.icon} alt={milestone.title} fill className="object-contain p-2.5" unoptimized />
                   </motion.div>
                   
                   <div>

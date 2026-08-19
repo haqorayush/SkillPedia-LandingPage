@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
@@ -26,12 +27,12 @@ function StepItem({ step, index, totalSteps, scrollYProgress }: { step: { id: st
     >
       <motion.div 
         style={{ scale }}
-        className={`w-20 h-20 flex-shrink-0 rounded-full flex items-center justify-center text-3xl md:mb-6 shadow-lg border-4 border-white dark:border-[#071340] transition-colors duration-500 relative ${isLast ? 'shadow-green-400/50' : ''}`}
-        initial={{ backgroundColor: "#F3F4F6" }}
+        className={`w-20 h-20 flex-shrink-0 rounded-full flex items-center justify-center text-3xl md:mb-6 shadow-lg border-4 border-white dark:border-[#071340] transition-colors duration-500 relative overflow-hidden ${isLast ? 'shadow-green-400/50' : ''}`}
+        initial={{ backgroundColor: step.color }}
         whileInView={{ backgroundColor: step.color }}
         viewport={{ once: true }}
       >
-        {step.icon}
+        <Image src={step.icon} alt={step.title} fill className="object-cover" unoptimized />
         {isLast && (
           <motion.div 
             className="absolute inset-0 bg-green-400/30 rounded-full blur-md md:-inset-4 md:bg-green-400/20 md:blur-xl -z-10"

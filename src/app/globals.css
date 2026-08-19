@@ -131,10 +131,10 @@ body {
    ========================================== */
 
 @media (pointer: fine) {
-  * {
+  .custom-cursor-active * {
     cursor: none !important;
   }
-  input, textarea, [contenteditable="true"] {
+  .custom-cursor-active input, .custom-cursor-active textarea, .custom-cursor-active [contenteditable="true"] {
     cursor: text !important;
   }
 }
@@ -155,8 +155,13 @@ h1, h2, h3, h4, h5, h6 {
    ========================================== */
 
 ::selection {
-  background: rgba(255, 122, 0, 0.2);
+  background: rgba(255, 122, 0, 0.25);
   color: var(--navy);
+}
+
+.dark ::selection {
+  background: rgba(255, 122, 0, 0.35);
+  color: #FFFFFF;
 }
 
 /* ==========================================
@@ -169,13 +174,13 @@ h1, h2, h3, h4, h5, h6 {
    ANIMATED GRADIENT MESH (Hero)
    ========================================== */
 
-.animated-gradient-mesh {
+.dark .animated-gradient-mesh {
   position: relative;
   background-color: var(--navy-dark);
   z-index: 0;
 }
 
-.animated-gradient-mesh::before {
+.dark .animated-gradient-mesh::before {
   content: "";
   position: absolute;
   top: -50%;
@@ -207,6 +212,13 @@ h1, h2, h3, h4, h5, h6 {
    ========================================== */
 
 .glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark .glass {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -382,6 +394,10 @@ h1, h2, h3, h4, h5, h6 {
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  html, body {
+    max-width: 100%;
+    overflow-x: clip;
   }
   body {
     @apply bg-background text-foreground;

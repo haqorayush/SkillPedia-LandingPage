@@ -1,16 +1,26 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TESTIMONIALS } from '@/lib/constants';
 
 function TestimonialCard({ testimonial, onClick }: { testimonial: typeof TESTIMONIALS[number], onClick?: () => void }) {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (onClick && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
     <div 
       onClick={onClick}
+      onKeyDown={onClick ? handleKeyDown : undefined}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
       className={`flex-shrink-0 w-[350px] p-6 rounded-2xl bg-white/60 dark:bg-[#0B1F5E]/80 backdrop-blur-md border border-white/40 dark:border-blue-500/20 shadow-lg dark:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-transform hover:scale-[1.02] mx-4 ${onClick ? 'cursor-pointer' : ''}`}
     >
-      <div className="flex text-[#FF7A00] mb-4 text-sm" aria-label="5 out of 5 stars">
+      <div className="flex text-[#FF7A00] mb-4 text-sm" role="img" aria-label="5 out of 5 stars">
         <span aria-hidden="true">{'★'.repeat(5)}</span>
       </div>
       <p className="text-gray-700 dark:text-gray-300 mb-6 italic leading-relaxed h-24 overflow-hidden">
@@ -35,13 +45,24 @@ export default function TestimonialsSection() {
   const [isPaused, setIsPaused] = useState(false);
   const [activeReview, setActiveReview] = useState<typeof TESTIMONIALS[number] | null>(null);
 
+  useEffect(() => {
+    if (!activeReview) return;
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setActiveReview(null);
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [activeReview]);
+
   const isAnimationPaused = isPaused || activeReview !== null;
 
   return (
     <section id="testimonials" className="py-24 bg-gray-50 dark:bg-[#071340] overflow-hidden relative">
       <button 
         onClick={() => setIsPaused(!isPaused)} 
-        className="absolute right-4 top-4 md:right-6 md:top-6 p-2 rounded-full bg-white dark:bg-[#0B1F5E] shadow-md text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white border border-gray-200 dark:border-white/10 z-20 flex items-center justify-center"
+        className="absolute right-4 top-4 md:right-6 md:top-6 p-2 rounded-full bg-white dark:bg-[#0B1F5E] shadow-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border border-gray-200 dark:border-white/10 z-20 flex items-center justify-center transition-colors"
         aria-label={isPaused ? "Play testimonials animation" : "Pause testimonials animation"}
       >
         {isPaused ? (
@@ -87,7 +108,18 @@ export default function TestimonialsSection() {
       {/* Full Review Modal */}
       <AnimatePresence>
         {activeReview && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
+          <div 
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-reviewer-name"
+            tabIndex={-1}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') {
+                setActiveReview(null);
+              }
+            }}
+          >
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -112,7 +144,7 @@ export default function TestimonialsSection() {
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
               </button>
               
-              <div className="flex text-[#FF7A00] mb-8 text-xl" aria-label="5 out of 5 stars">
+              <div className="flex text-[#FF7A00] mb-8 text-xl" role="img" aria-label="5 out of 5 stars">
                 <span aria-hidden="true">{'★'.repeat(5)}</span>
               </div>
               
@@ -125,7 +157,7 @@ export default function TestimonialsSection() {
                   {activeReview.name.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 dark:text-white text-lg">{activeReview.name}</h4>
+                  <h4 id="modal-reviewer-name" className="font-bold text-gray-900 dark:text-white text-lg">{activeReview.name}</h4>
                   <p className="text-gray-500 dark:text-gray-400">{activeReview.role}</p>
                 </div>
               </div>

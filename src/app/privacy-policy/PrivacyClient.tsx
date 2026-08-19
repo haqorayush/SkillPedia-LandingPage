@@ -43,7 +43,7 @@ export default function PrivacyClient() {
             className="prose prose-lg prose-blue dark:prose-invert max-w-none font-[family-name:var(--font-body)]"
           >
             <p className="lead text-xl text-gray-700 dark:text-gray-300 mb-10">
-              SkillPedia ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how your personal information is collected, used, and disclosed by SkillPedia when you visit our website or enroll in our programs.
+              SkillPedia (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how your personal information is collected, used, and disclosed by SkillPedia when you visit our website or enroll in our programs.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-12 mb-6">1. Information We Collect</h2>

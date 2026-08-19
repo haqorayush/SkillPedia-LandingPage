@@ -1,13 +1,11 @@
 "use client";
 
 import { useState, useEffect, useCallback, Suspense } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, Plus } from "lucide-react";
-import { FaLinkedinIn, FaXTwitter, FaGithub, FaInstagram } from "react-icons/fa6";
+import { ArrowUpRight } from "lucide-react";
 
 // Dynamically import Three.js scene to avoid SSR issues
 const HeroScene = dynamic(() => import('@/components/3d/HeroScene'), { ssr: false });
@@ -19,8 +17,6 @@ interface PortalContent {
   description: string;
   ctaText: string;
   ctaHref: string;
-  statValue: string;
-  statLabel: string;
 }
 
 const PORTAL_DATA: Record<NavItemKey, PortalContent> = {
@@ -30,8 +26,6 @@ const PORTAL_DATA: Record<NavItemKey, PortalContent> = {
       "India's premier engineering career acceleration platform — transforming aspiring developers into production-ready software engineers in 12 intensive weeks.",
     ctaText: "EXPLORE PLATFORM",
     ctaHref: "/",
-    statValue: "500+ PARTNERS",
-    statLabel: "94% Placement Rate",
   },
   "OUR TEAM": {
     tagline: "EXPERT INSTRUCTORS & MENTORS",
@@ -39,8 +33,6 @@ const PORTAL_DATA: Record<NavItemKey, PortalContent> = {
       "Learn directly from seasoned software engineers, AI researchers, and tech leads from top-tier product companies who are dedicated to accelerating your tech career.",
     ctaText: "MEET THE TEAM",
     ctaHref: "/team",
-    statValue: "50+ EXPERTS",
-    statLabel: "from FAANG & Top Tech",
   },
   CONTACT: {
     tagline: "TALK TO OUR ADVISORS",
@@ -48,8 +40,6 @@ const PORTAL_DATA: Record<NavItemKey, PortalContent> = {
       "Connect directly with our admissions team, engineering mentors, and industry counselors to kickstart your software engineering journey today.",
     ctaText: "APPLY FOR BATCH",
     ctaHref: "/apply",
-    statValue: "24/7 SUPPORT",
-    statLabel: "Admissions Open",
   },
 };
 
@@ -57,10 +47,8 @@ const NAV_ITEMS: NavItemKey[] = ["HOME", "OUR TEAM", "CONTACT"];
 
 export default function NavigationPortalView({
   initialSection = "OUR TEAM",
-  onClose,
 }: {
   initialSection?: NavItemKey;
-  onClose?: () => void;
 }) {
   const router = useRouter();
   const [activeItem, setActiveItem] = useState<NavItemKey>(initialSection);
@@ -75,7 +63,6 @@ export default function NavigationPortalView({
 
   const bgTranslateX = useTransform(smoothX, [-0.5, 0.5], [-20, 20]);
   const bgTranslateY = useTransform(smoothY, [-0.5, 0.5], [-20, 20]);
-  const bgScale = useTransform(smoothY, [-0.5, 0.5], [1.05, 1.08]);
 
   const [particles, setParticles] = useState<Array<{width: string; height: string; left: string; top: string; animationDelay: string; animationDuration: string}>>([]);
 
@@ -105,8 +92,7 @@ export default function NavigationPortalView({
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        if (onClose) onClose();
-        else router.push("/");
+        router.push("/");
       } else if (e.key === "ArrowDown") {
         setActiveItem((curr) => {
           const idx = NAV_ITEMS.indexOf(curr);
@@ -122,7 +108,7 @@ export default function NavigationPortalView({
         if (item) router.push(item.ctaHref);
       }
     },
-    [activeItem, onClose, router]
+    [activeItem, router]
   );
 
   useEffect(() => {
@@ -132,25 +118,18 @@ export default function NavigationPortalView({
 
   const activeContent = PORTAL_DATA[activeItem];
 
-  const handleClose = () => {
-    if (onClose) {
-      onClose();
-    } else {
-      router.push("/");
-    }
-  };
-
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="relative w-full min-h-screen h-screen overflow-hidden animated-gradient-mesh bg-[#0B1F5E] dark:bg-[#071340] text-white flex flex-col justify-between select-none font-[family-name:var(--font-body)]"
+      className="relative w-full min-h-screen overflow-y-auto lg:overflow-hidden lg:h-screen animated-gradient-mesh bg-gradient-to-br from-blue-50 via-white to-blue-50 dark:from-[#0B1F5E] dark:to-[#071340] text-gray-900 dark:text-white flex flex-col justify-between select-none font-[family-name:var(--font-body)]"
     >
+      <h1 className="sr-only">About SkillPedia — Engineering Career Acceleration</h1>
       {/* Background Particles & Hero Scene */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         {particles.map((style, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-white/20 animate-float transform-gpu will-change-transform"
+            className="absolute rounded-full bg-blue-500/20 dark:bg-white/20 animate-float transform-gpu will-change-transform"
             style={{
               ...style,
               x: bgTranslateX,
@@ -166,8 +145,8 @@ export default function NavigationPortalView({
         </Suspense>
       </div>
 
-      <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#071340]/90 via-transparent to-[#071340]/60 pointer-events-none" />
-      <div className="absolute inset-0 z-0 bg-radial-vignette opacity-70 pointer-events-none" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-t from-white/90 dark:from-[#071340]/90 via-transparent to-white/60 dark:to-[#071340]/60 pointer-events-none" />
+      <div className="absolute inset-0 z-0 bg-radial-vignette opacity-30 dark:opacity-70 pointer-events-none" />
 
       {/* ============================================================ */}
       {/* TOP BAR */}
@@ -210,7 +189,7 @@ export default function NavigationPortalView({
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                        className="text-[#A3E635] text-2xl sm:text-4xl font-bold leading-none select-none drop-shadow-[0_0_12px_rgba(163,230,53,0.8)]"
+                        className="text-[#FF7A00] dark:text-[#A3E635] text-2xl sm:text-4xl font-bold leading-none select-none drop-shadow-[0_0_12px_rgba(255,122,0,0.4)] dark:drop-shadow-[0_0_12px_rgba(163,230,53,0.8)]"
                       >
                         ›
                       </motion.span>
@@ -226,8 +205,8 @@ export default function NavigationPortalView({
                     <h2
                       className={`font-[family-name:var(--font-heading-display)] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight uppercase transition-all duration-300 ${
                         isActive
-                          ? "text-[#A3E635] drop-shadow-[0_0_25px_rgba(163,230,53,0.45)]"
-                          : "text-white/80 hover:text-white"
+                          ? "text-[#FF7A00] dark:text-[#A3E635] drop-shadow-[0_0_25px_rgba(255,122,0,0.35)] dark:drop-shadow-[0_0_25px_rgba(163,230,53,0.45)]"
+                          : "text-gray-600 hover:text-gray-900 dark:text-white/80 dark:hover:text-white"
                       }`}
                     >
                       {item}
@@ -252,13 +231,13 @@ export default function NavigationPortalView({
                 {/* Section Tagline */}
                 <div className="inline-flex items-center space-x-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#FF7A00] animate-ping" />
-                  <span className="text-[11px] font-mono tracking-widest text-[#FF9E40] uppercase">
+                  <span className="text-[11px] font-mono tracking-widest text-[#FF7A00] dark:text-[#FF9E40] uppercase">
                     {activeContent.tagline}
                   </span>
                 </div>
 
                 {/* Description Paragraph */}
-                <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed font-normal tracking-wide text-pretty">
+                <p className="text-gray-600 dark:text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed font-normal tracking-wide text-pretty">
                   {activeContent.description}
                 </p>
 
@@ -266,7 +245,7 @@ export default function NavigationPortalView({
                 <div className="pt-2">
                   <Link
                     href={activeContent.ctaHref}
-                    className="group inline-flex items-center space-x-3 px-6 py-3 rounded-lg border border-white/25 bg-white/5 hover:bg-white/15 hover:border-white/60 backdrop-blur-md text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 text-white shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                    className="group inline-flex items-center space-x-3 px-6 py-3 rounded-lg border border-gray-300 dark:border-white/25 bg-white/80 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/15 hover:border-gray-400 dark:hover:border-white/60 backdrop-blur-md text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 text-gray-900 dark:text-white shadow-lg hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
                   >
                     <span>{activeContent.ctaText}</span>
                     <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

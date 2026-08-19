@@ -52,25 +52,26 @@ function Counter({ end, suffix = '', duration = 2000 }: { end: number, suffix?: 
 
 export default function StatsSection() {
   return (
-    <section id="stats" className="py-20 relative bg-[#0B1F5E] dark:bg-[#071340] overflow-hidden">
+    <section id="stats" className="py-20 relative bg-gray-50 dark:bg-[#071340] border-y border-gray-100 dark:border-white/5 overflow-hidden">
+      <h2 className="sr-only">Key Program Statistics</h2>
       {/* Background decoration */}
-      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent"></div>
+      <div className="absolute inset-0 opacity-20 dark:opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/20 via-transparent to-transparent pointer-events-none"></div>
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-white/10">
           {STATS.map((stat, index) => (
             <motion.div 
-              key={index}
+              key={stat.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               className={`flex flex-col items-center justify-center p-6 text-center ${index > 0 ? 'pt-8 md:pt-6' : ''}`}
             >
-              <div className="text-4xl md:text-6xl font-bold text-white mb-2 tracking-tight">
+              <div className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">
                 <Counter end={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-white/60 dark:text-blue-200 font-medium text-lg uppercase tracking-wider">
+              <div className="text-gray-600 dark:text-blue-200 font-medium text-lg uppercase tracking-wider">
                 {stat.label}
               </div>
             </motion.div>

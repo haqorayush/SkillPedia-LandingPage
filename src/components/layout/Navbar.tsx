@@ -12,9 +12,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
-
-  const isDarkHeader = (pathname === '/' || pathname === '/about') && !isScrolled;
 
   useEffect(() => {
     let ticking = false;
@@ -31,44 +28,33 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Section visibility tracking
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-20% 0px -80% 0px' }
-    );
-
-    const sections = document.querySelectorAll('section[id]');
-    sections.forEach((section) => observer.observe(section));
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
-  }, []);
-
-  // Close mobile menu when clicking outside or on a link
+  // Close mobile menu when clicking outside or on a link, resize, or escape key
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setIsMobileMenuOpen(false);
+      };
+      const handleResize = () => {
+        if (window.innerWidth >= 768) setIsMobileMenuOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener('resize', handleResize);
+      return () => {
+        document.body.style.overflow = 'unset';
+        window.removeEventListener('keydown', handleKeyDown);
+        window.removeEventListener('resize', handleResize);
+      };
     } else {
       document.body.style.overflow = 'unset';
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [isMobileMenuOpen]);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform-gpu will-change-transform ${
         isScrolled
-          ? 'bg-white/80 dark:bg-[#0B1F5E]/80 backdrop-blur-xl border-b border-gray-200 dark:border-blue-500/20 shadow-lg dark:shadow-[0_4px_20px_rgba(7,19,64,0.5)] py-4'
+          ? 'bg-white/85 dark:bg-[#071340]/85 backdrop-blur-xl border-b border-gray-200 dark:border-white/10 shadow-lg dark:shadow-[0_4px_20px_rgba(7,19,64,0.5)] py-4'
           : 'bg-transparent border-b border-transparent py-6'
       }`}
     >
@@ -104,8 +90,8 @@ export default function Navbar() {
                   href={link.href}
                   className={`text-sm font-medium transition-colors ${
                     isActive
-                      ? (!isDarkHeader ? 'text-blue-600 dark:text-white font-semibold' : 'text-white font-semibold')
-                      : (!isDarkHeader ? 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400' : 'text-gray-300 hover:text-white')
+                      ? 'text-blue-600 dark:text-white font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white'
                   }`}
                 >
                   {link.label}
@@ -142,9 +128,11 @@ export default function Navbar() {
           <div className="flex items-center space-x-3 md:hidden z-50">
             <ThemeToggle />
             <button
-              className={`p-2 relative ${!isDarkHeader ? 'text-gray-700 dark:text-white' : 'text-white'}`}
+              className="p-2 relative text-gray-700 dark:text-white"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle mobile menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               <div className="w-6 flex flex-col items-end gap-1.5">
                 <span
@@ -172,11 +160,14 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: '100vh' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 top-0 left-0 right-0 bottom-0 bg-white/95 dark:bg-[#0B1F5E]/95 backdrop-blur-xl border-b border-gray-200 dark:border-blue-500/20 md:hidden flex flex-col pt-24 pb-6 px-4"
+            className="fixed inset-0 top-0 left-0 right-0 bottom-0 bg-white/95 dark:bg-[#071340]/95 backdrop-blur-2xl border-b border-gray-200 dark:border-white/10 md:hidden flex flex-col pt-24 pb-6 px-4"
           >
             <div className="flex flex-col space-y-6 flex-grow">
               {NAV_LINKS?.map((link) => {

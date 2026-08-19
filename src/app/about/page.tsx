@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import NavigationPortalView from "@/components/sections/NavigationPortalView";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "About SkillPedia — Engineering Career Acceleration",
@@ -10,11 +8,6 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return (
-    <>
-      <Navbar />
-      <NavigationPortalView initialSection="OUR TEAM" />
-      <Footer />
-    </>
-  );
+  return <NavigationPortalView initialSection="OUR TEAM" />;
 }
+
