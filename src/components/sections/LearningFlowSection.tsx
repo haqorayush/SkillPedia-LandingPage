@@ -1,11 +1,15 @@
 "use client";
-import Image from "next/image";
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { LEARNING_STEPS } from "@/lib/constants";
+import { BookOpen, Code2, Blocks, Rocket, Presentation, Users, Briefcase, LucideIcon } from "lucide-react";
 
-function StepItem({ step, index, totalSteps, scrollYProgress }: { step: { id: string; title: string; description: string; icon: string; color: string; }, index: number, totalSteps: number, scrollYProgress: MotionValue<number> }) {
+const ICON_MAP: Record<string, LucideIcon> = {
+  BookOpen, Code2, Blocks, Rocket, Presentation, Users, Briefcase
+};
+
+function StepItem({ step, index, totalSteps, scrollYProgress }: { step: { id: string; title: string; description: string; iconName: string; color: string; }, index: number, totalSteps: number, scrollYProgress: MotionValue<number> }) {
   const stepThreshold = index / (totalSteps - 1);
   const isLast = index === totalSteps - 1;
   
@@ -27,12 +31,12 @@ function StepItem({ step, index, totalSteps, scrollYProgress }: { step: { id: st
     >
       <motion.div 
         style={{ scale }}
-        className={`w-20 h-20 flex-shrink-0 rounded-full flex items-center justify-center text-3xl md:mb-6 shadow-lg border-4 border-white dark:border-[#071340] transition-colors duration-500 relative overflow-hidden ${isLast ? 'shadow-green-400/50' : ''}`}
-        initial={{ backgroundColor: step.color }}
-        whileInView={{ backgroundColor: step.color }}
-        viewport={{ once: true }}
+        className={`w-20 h-20 flex-shrink-0 rounded-full flex items-center justify-center md:mb-6 shadow-inner border-4 border-blue-100 dark:border-blue-500/20 bg-gradient-to-br from-blue-50 to-orange-50 dark:from-[#0B1F5E] dark:to-[#071340] text-blue-600 dark:text-blue-400 transition-colors duration-500 relative ${isLast ? 'shadow-green-400/50' : ''}`}
       >
-        <Image src={step.icon} alt={step.title} fill className="object-cover" unoptimized />
+        {(() => {
+          const Icon = ICON_MAP[step.iconName];
+          return Icon ? <Icon className="w-10 h-10" strokeWidth={2} /> : null;
+        })()}
         {isLast && (
           <motion.div 
             className="absolute inset-0 bg-green-400/30 rounded-full blur-md md:-inset-4 md:bg-green-400/20 md:blur-xl -z-10"
